@@ -4,6 +4,10 @@
   --border-grey: rgb(103, 102, 105);
 }
 
+.active {
+  font-weight: 600;
+}
+
 img {
   width: 60%;
   align-self: center;
