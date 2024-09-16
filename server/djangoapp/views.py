@@ -33,6 +33,8 @@ def login_user(request):
     return JsonResponse(data)
 
 # Create a `logout_request` view to handle sign out request
+
+
 @csrf_exempt
 def logout_request(request):
     """Handles logout request when user logs out"""
@@ -41,6 +43,8 @@ def logout_request(request):
     return JsonResponse(data)
 
 # Create a `registration` view to handle sign up request
+
+
 @csrf_exempt
 def registration(request):
     """Handles registration requests"""
@@ -64,7 +68,8 @@ def registration(request):
     if not username_exist:
         # Create user in auth_user table
         user = User.objects.create_user(
-            username=username, first_name=first_name, last_name=last_name, password=password, email=email)
+            username=username, first_name=first_name, last_name=last_name,
+            password=password, email=email)
         # Login the user and redirect to list page
         login(request, user)
         data = {"userName": username, "status": "Authenticated"}
@@ -89,6 +94,8 @@ def get_cars(request):
 
 # Update the `get_dealerships` render list of dealerships all by default,
 # particular state if state is passed
+
+
 def get_dealerships(request, state="All"):
     """Fetches list of dealerships"""
     if (state == "All"):
@@ -99,6 +106,8 @@ def get_dealerships(request, state="All"):
     return JsonResponse({"status": 200, "dealers": dealerships})
 
 # Create a `get_dealer_reviews` view to render the reviews of a dealer
+
+
 def get_dealer_reviews(request, dealer_id):
     """Fetches dealership reviews"""
     # if dealer id has been provided
@@ -114,6 +123,8 @@ def get_dealer_reviews(request, dealer_id):
     return JsonResponse({"status": 400, "message": "Bad Request"})
 
 # Create a `get_dealer_details` view to render the dealer details
+
+
 def get_dealer_details(request, dealer_id):
     """Fetches details of specific dealership"""
     if dealer_id:
@@ -124,6 +135,8 @@ def get_dealer_details(request, dealer_id):
     return JsonResponse({"status": 400, "message": "Bad Request"})
 
 # Create a `add_review` view to submit a review
+
+
 def add_review(request):
     """Adds review if user is authorized"""
     if request.user.is_anonymous is False:
