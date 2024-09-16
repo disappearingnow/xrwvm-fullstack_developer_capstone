@@ -83,7 +83,7 @@ def get_cars(request):
     """Fetches list of cars"""
     count = CarMake.objects.filter().count()
     print(count)
-    if (count == 0):
+    if count == 0:
         initiate()
     car_models = CarModel.objects.select_related('car_make')
     cars = []
@@ -98,7 +98,7 @@ def get_cars(request):
 
 def get_dealerships(request, state="All"):
     """Fetches list of dealerships"""
-    if (state == "All"):
+    if state == "All":
         endpoint = "/fetchDealers"
     else:
         endpoint = "/fetchDealers/"+state
@@ -143,9 +143,10 @@ def add_review(request):
         data = json.loads(request.body)
         try:
             response = post_review(data)
-            return JsonResponse({"status": 200})
+            return JsonResponse({"status": response.status_code})
         except Exception as err:
             print(err)
-            return JsonResponse({"status": 401, "message": "Error in posting review"})
+            return JsonResponse({"status": 401,
+                                 "message": "Error in posting review"})
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
