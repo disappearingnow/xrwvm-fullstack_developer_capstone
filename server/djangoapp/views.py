@@ -143,7 +143,7 @@ def add_review(request):
         data = json.loads(request.body)
         try:
             response = post_review(data)
-            return JsonResponse({"status": response.status_code})
+            return JsonResponse({"status": 200})
         except Exception as err:
             print(err)
             return JsonResponse({"status": 401,
